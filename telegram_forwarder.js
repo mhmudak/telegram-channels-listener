@@ -7,11 +7,15 @@ import fs from "fs";
 import dotenv from "dotenv";
 dotenv.config();
 
-const apiId = process.env.API_ID;
+const apiId = Number(process.env.API_ID);
 const apiHash = process.env.API_HASH;
 
 const botToken = process.env.BOT_TOKEN;
 const chatId = process.env.CHAT_ID;
+
+if (!process.env.API_ID || !process.env.API_HASH || !process.env.BOT_TOKEN) {
+    throw new Error("Missing environment variables");
+}
 
 /* CHANNELS */
 const channels = {

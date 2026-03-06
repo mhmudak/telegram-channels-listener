@@ -120,16 +120,16 @@ async function startClient() {
             if (message.photo) {
 
                 while (downloading) {
-    await new Promise(r => setTimeout(r, 200));
-}
+                    await new Promise(r => setTimeout(r, 200));
+                }
 
-downloading = true;
+                downloading = true;
 
-const buffer = await client.downloadMedia(message, {
-    workers: 1
-});
+                const buffer = await client.downloadMedia(message, {
+                    workers: 1
+                });
 
-downloading = false;
+                downloading = false;
 
                 await sendTelegramFile(
                     "sendPhoto",
@@ -146,16 +146,16 @@ downloading = false;
             if (message.media) {
 
                 while (downloading) {
-    await new Promise(r => setTimeout(r, 200));
-}
+                    await new Promise(r => setTimeout(r, 200));
+                }
 
-downloading = true;
+                downloading = true;
 
-const buffer = await client.downloadMedia(message, {
-    workers: 1
-});
+                const buffer = await client.downloadMedia(message, {
+                    workers: 1
+                });
 
-downloading = false;
+                downloading = false;
 
                 const doc = message.media.document;
 
@@ -249,18 +249,19 @@ downloading = false;
                         return;
                     }
 
-                    /* AUDIO FILE */
-                    if (audioAttr && !audioAttr.voice) {
+                    const fileNameAttr = doc.attributes?.find(
+                        a => a instanceof Api.DocumentAttributeFilename
+                    );
 
-                        await sendTelegramFile(
-                            "sendAudio",
-                            "audio",
-                            buffer,
-                            "audio.mp3"
-                        );
+                    const fileName = fileNameAttr?.fileName || "file.bin";
 
-                        return;
-                    }
+                    await sendTelegramFile(
+                        "sendDocument",
+                        "document",
+                        buffer,
+                        fileName,
+                        caption
+                    );
                 }
 
                 /* OTHER FILES */

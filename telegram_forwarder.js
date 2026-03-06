@@ -115,7 +115,9 @@ async function startClient() {
             /* PHOTO */
             if (message.photo) {
 
-                const buffer = await client.downloadMedia(message);
+                const buffer = await client.downloadMedia(message, {
+                    workers: 1
+                });
 
                 await sendTelegramFile(
                     "sendPhoto",

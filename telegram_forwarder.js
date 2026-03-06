@@ -125,7 +125,9 @@ async function startClient() {
             /* MEDIA */
             if (message.media) {
 
-                const buffer = await client.downloadMedia(message);
+                const buffer = await client.downloadMedia(message, {
+                    workers: 1
+                });
 
                 const doc = message.media.document;
 

@@ -42,11 +42,15 @@ const client = new TelegramClient(
     apiHash,
     {
         connectionRetries: 5,
-        autoReconnect: true
+        autoReconnect: true,
+        useWSS: false,
+        timeout: 30000
     }
 );
 
 const mediaGroups = new Map();
+
+let downloading = false;
 
 async function sendTelegramFile(method, field, buffer, filename, caption = "") {
 
@@ -115,9 +119,17 @@ async function startClient() {
             /* PHOTO */
             if (message.photo) {
 
-                const buffer = await client.downloadMedia(message, {
-                    workers: 1
-                });
+                while (downloading) {
+    await new Promise(r => setTimeout(r, 200));
+}
+
+downloading = true;
+
+const buffer = await client.downloadMedia(message, {
+    workers: 1
+});
+
+downloading = false;
 
                 await sendTelegramFile(
                     "sendPhoto",
@@ -133,9 +145,17 @@ async function startClient() {
             /* MEDIA */
             if (message.media) {
 
-                const buffer = await client.downloadMedia(message, {
-                    workers: 1
-                });
+                while (downloading) {
+    await new Promise(r => setTimeout(r, 200));
+}
+
+downloading = true;
+
+const buffer = await client.downloadMedia(message, {
+    workers: 1
+});
+
+downloading = false;
 
                 const doc = message.media.document;
 

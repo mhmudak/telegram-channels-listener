@@ -4,12 +4,14 @@ import { NewMessage } from "telegram/events/index.js";
 import { Api } from "telegram";
 import input from "input";
 import fs from "fs";
+import dotenv from "dotenv";
+dotenv.config();
 
-const apiId = 31315996;
-const apiHash = "3aec3d9df5b943f3ee01b5ef1c662865";
+const apiId = process.env.API_ID;
+const apiHash = process.env.API_HASH;
 
-const botToken = "8578109251:AAE2W-RamARfPhWB9WcI3eMRixupPOudBTY";
-const chatId = "781843365";
+const botToken = process.env.BOT_TOKEN;
+const chatId = process.env.CHAT_ID;
 
 /* CHANNELS */
 const channels = {

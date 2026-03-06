@@ -36,9 +36,15 @@ if (fs.existsSync(sessionFile)) {
 
 const session = new StringSession(stringSession);
 
-const client = new TelegramClient(session, apiId, apiHash, {
-    connectionRetries: 5
-});
+const client = new TelegramClient(
+    session,
+    apiId,
+    apiHash,
+    {
+        connectionRetries: 5,
+        autoReconnect: true
+    }
+);
 
 const mediaGroups = new Map();
 

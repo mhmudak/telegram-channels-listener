@@ -98,7 +98,13 @@ async function startClient() {
         if (processedMessages.size > 5000) processedMessages.clear();
 
         const channelName = channels[sourceChatId];
-        const now = new Date().toLocaleTimeString();
+        const now = new Intl.DateTimeFormat("en-GB", {
+            timeZone: "Asia/Beirut",
+            hour: "numeric",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true
+        }).format(new Date());
         const caption = message.message || message.text || "";
         try {
 
@@ -110,7 +116,7 @@ async function startClient() {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         chat_id: chatId,
-                        text: `📢 ${channelName}\n${now}\n\n${message.text}`
+                        text: `📢📢📢📢📢\n${message.text}\n\n🔔 ${channelName}\n${now}\n`
                     })
                 });
 

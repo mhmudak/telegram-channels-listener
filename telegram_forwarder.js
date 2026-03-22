@@ -19,7 +19,7 @@ if (!process.env.API_ID || !process.env.API_HASH || !process.env.BOT_TOKEN) {
 
 /* CHANNELS */
 const channels = {
-    "-1003203351813": "ABR",
+    "-1003873074287": "ABR",
     "-1002248922519": "Carl",
     "-1003423393382": "MyChannel TEST"
 };

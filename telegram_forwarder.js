@@ -20,6 +20,7 @@ if (!process.env.API_ID || !process.env.API_HASH || !process.env.BOT_TOKEN) {
 /* CHANNELS */
 const channels = {
     "-1002017948189": "The Golden Astro",
+    "-1002588053349": "Qamar VIP Forex Signals",
     "-1003968791718": "Alpha Elite Vip",
     "-1003423393382": "MyChannel TEST"
 };
